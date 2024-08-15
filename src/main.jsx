@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <Search />,
   },
   {
-    path: "Pepper",
+    path: "Pepper/:id",
     element: <Pepper />,
   },
 ]);
