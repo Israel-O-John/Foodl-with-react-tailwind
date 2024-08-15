@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import Pepper from './components/Search/Pepper.jsx';
 import Search from '/src/components/Search/Search.jsx';
+
 
 import {
   createBrowserRouter,
@@ -17,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "Search",
     element: <Search />,
+  },
+  {
+    path: "Pepper",
+    element: <Pepper />,
   },
 ]);
 
