@@ -19,25 +19,24 @@ export const Pepper = () => {
       meals;
     });
   }, [id]);
-  console.log(meals);
 
   return (
     <div>
-      <div className="w-full w-full bg-[url('/src/assets/images/Bg.png')] ">
+      <div className="w-full  bg-[url('/src/assets/images/Bg.png')] ">
         <div className="w-10/12 mx-auto pt-6 flex justify-between items-center">
           <img src={Foodl} alt="Foodl" />
           <div>
-            <ul className="flex gap-16">
-              <li className=" text-lg text-black">
-                <a href="/">Home</a>
+            <ul className="flex items-center gap-6 md:gap-12">
+              <li className=" text-sm md:text-lg text-black">
+                <Link to="/">Home</Link>
               </li>
-              <li className="text-bold font-bold font-b text-black">
+              <li className="text-sm font-bold md:text-lg text-black">
                 <Link to="/Search">Search</Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className="mx-auto items-center flex gap-4 justify-center">
+        <div className="mx-auto items-center flex flex-col md:flex-row gap-8 justify-center text-center md:text-left px-4">
           <img
             src={meals?.strMealThumb}
             alt={meals?.strMeal}
@@ -47,7 +46,7 @@ export const Pepper = () => {
             <h1 className="font-bold text-4xl text-black pb-6">
               {meals?.strMeal}
             </h1>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-col md:flex-row">
               <div className="shadow-inner shadow-white opacity-100 py-3 px-6">
                 <div className="flex gqp-2 items-center">
                   <img src={category} alt="category" />
@@ -74,42 +73,35 @@ export const Pepper = () => {
         </div>
       </div>
       {/* my code changes */}
-      <div className="flex flex-col gap-11 pt-[120px] pb-[150px]">
-        <div className="shadow-2xl mx-auto pt-[27px] pl-[33px] pb-[39px] pr-[150px] rounded-[10px]">
+      <div className="flex flex-col gap-11 pt-16 md:pt-[120px] pb-16 md:pb-[150px] px-4">
+        <div className="shadow-2xl mx-auto pt-6 px-4 md:px-8 pb-8 rounded-[10px] border w-11/12 md:w-auto">
           <h1 className="font-bold text-[32px] text-black pb-[26px]">
             Ingredients
           </h1>
-          <div className="flex flex-col gap-6">
-            <div className="flex gap-5 group">
-              <div className="flex border border-[#909090] px-[16px] text-[#909090] hover:text-black  rounded-[30px] py-[8.5px]  hover:bg-[#FF9F59] cursor-pointer  items-center gap-3 ">
-                <p className="text-base  ">{meals?.strIngredient1}</p>
-                <p className="border text-xs text-white px-[8px] py-[2px] rounded-[30px] bg-[#909090] group-hover:text-[#FF9F59]  group-hover:bg-white">
-                  3/4 cup
-                </p>
+          <div className="flex flex-col gap-6 flex-wrap">
+            <div className="flex flex-wrap gap-3 group">
+              <div className="flex flex-wrap gap-3">
+                {Array.from({ length: 20 }, (_, i) => {
+                  const ingredient = meals?.[`strIngredient${i + 1}`];
+                  const measure = meals?.[`strMeasure${i + 1}`];
+
+                  if (!ingredient) return null;
+
+                  return (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 border border-[#909090] px-4 py-2 rounded-[30px] text-sm text-[#909090] hover:bg-[#FF9F59] hover:text-black cursor-pointer"
+                    >
+                      <span>{ingredient}</span>
+                      {measure && (
+                        <span className="text-xs bg-[#909090] text-white px-2 py-1 rounded-full">
+                          {measure}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-              <p className="border border-[#909090] px-[16px] rounded-[30px] py-[8.5px] text-base text-[#909090] hover:bg-[#FF9F59] cursor-pointer hover:text-black">
-                {meals?.strIngredient2}
-              </p>
-              <p className="border border-[#909090] px-[16px] rounded-[30px] py-[8.5px] text-base text-[#909090] hover:bg-[#FF9F59] cursor-pointer hover:text-black">
-                {meals?.strIngredient3}
-              </p>
-              <p className="border border-[#909090] px-[16px] rounded-[30px] py-[8.5px] text-base text-[#909090] hover:bg-[#FF9F59] cursor-pointer hover:text-black">
-                {meals?.strIngredient4}
-              </p>
-            </div>
-            <div className="flex gap-5 group ">
-              <div className="flex gap-3 border rounded-[30px] text-[#909090] px-[16px] py-[8.5px]  hover:text-black hover:bg-[#FF9F59] cursor-pointer ">
-                <p className="text-base  ">{meals?.strIngredient5}</p>
-                <p className="text-xs px-[8px] py-[2px] border text-white rounded-[30px] bg-[#909090] group-hover:bg-white group-hover:text-[#FF9F59]    ">
-                  1/2 Teaspoon
-                </p>
-              </div>
-              <p className="border border-[#909090] px-[16px] rounded-[30px] py-[8.5px] text-base text-[#909090] hover:bg-[#FF9F59] cursor-pointer hover:text-black">
-              {meals?.strIngredient6}
-              </p>
-              <p className="border border-[#909090] px-[16px] rounded-[30px] py-[8.5px] text-base text-[#909090] hover:bg-[#FF9F59] cursor-pointer hover:text-black">
-              {meals?.strIngredient7}
-              </p>
             </div>
           </div>
         </div>
@@ -118,9 +110,7 @@ export const Pepper = () => {
             Instructions
           </h1>
           <div>
-            <p className="text-base pb-[16px]">
-            {meals?.strInstructions}
-            </p>
+            <p className="text-base pb-[16px]">{meals?.strInstructions}</p>
           </div>
         </div>
       </div>
